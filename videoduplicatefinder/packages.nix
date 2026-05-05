@@ -3,28 +3,57 @@
   inputs,
   ...
 }: {
-  perSystem = {pkgs, ...}: let
+  perSystem = {pkgs, lib, ...}: let
     src = inputs.videoduplicatefinder;
+    pname = "videoduplicatefinder";
     projectFile = "./VideoDuplicateFinder.sln";
     dotnet-sdk = pkgs.dotnet-sdk_9;
-    dotnet-runtime = pkgs.dotnetCorePackages.runtime_9_0;
+    #dotnet-runtime = pkgs.dotnetCorePackages.runtime_9_0;
     version = "3.0.0";
-    rev = "e8148a92f3d34265742c4999ee886dc5a05f13db";
+    rev = "1423fbe52e5b39cf7c83a49e62290e95fa00faa9";
     shortrev = builtins.substring 0 7 rev;
+    fullVersion = "${version}+git-${shortrev}";
   in {
     packages = {
       videoduplicatefinder = pkgs.buildDotnetModule {
-        inherit projectFile dotnet-sdk dotnet-runtime;
-        pname = "videoduplicatefinder";
-        version = "${version}+git-${shortrev}";
+        inherit projectFile dotnet-sdk;
+        pname = pname;
+        version = fullVersion;
         src = src;
-        nugetDeps = ./nix/deps.json; # run `nix build .#default.passthru.fetch-deps && ./result` and put the result here
+        nugetDeps = ./nix/deps.json;
         packNupkg = false;
         executables = ["VDF.GUI" "VDF.Web" "vdf-cli"];
         runtimeDeps = [pkgs.ffmpeg];
+        enableParallelBuilding = false; # somehow parallel build causes random failures :(
 
-        doCheck = false;
+        doCheck = true;
         disabledTests = ["VDF.Core.Tests.Chromaprint.FftServiceTests.Forward_PureSineWave_PeakAtExpectedBin"];
+        nativeBuildInputs = [pkgs.ffmpeg];
+
+        postInstall = ''
+          install -Dm444 -T "$src/VDF.GUI/Assets/Linux/icon.png" "$out/share/icons/hicolor/256x256/apps/$pname.png"
+
+          install -Dm555 -t $out/share/applications ${
+            pkgs.makeDesktopItem {
+              name = pname;
+              desktopName = "Video Duplicate Finder";
+              genericName = "Duplicate File Finder";
+              comment = "Find duplicate video and image files based on visual similarity";
+              exec = "VDF.GUI";
+              icon = pname;
+              type = "Application";
+              categories = ["Utility" "FileManager"];
+              keywords=["duplicate" "video" "image" "finder" "similarity"];
+              startupNotify = true;
+            }
+          }/share/applications/$pname.desktop
+        '';
+
+        meta = {
+          homepage = "https://github.com/0x90d/videoduplicatefinder";
+          description = "Video Duplicate Finder";
+          license = lib.licenses.agpl3Only;
+        };
       };
     };
     devShells = let
@@ -55,6 +84,7 @@
           cd "$TMPDIR"
           dotnet restore --packages out && \
           nuget-to-json out > deps.json && \
+          dotnet build && \
           echo && echo "GENERATED: $TMPDIR/deps.json"
           cd "$OLDPWD"
           exit
