@@ -10,7 +10,7 @@
     dotnet-sdk = pkgs.dotnet-sdk_9;
     #dotnet-runtime = pkgs.dotnetCorePackages.runtime_9_0;
     version = "3.0.0";
-    rev = "1423fbe52e5b39cf7c83a49e62290e95fa00faa9";
+    rev = "729c7cb73a9b6003b069986468ecab94fd82ed22";
     shortrev = builtins.substring 0 7 rev;
     fullVersion = "${version}+git-${shortrev}";
   in {
