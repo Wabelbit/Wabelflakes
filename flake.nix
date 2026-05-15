@@ -8,13 +8,14 @@
 
     # all modules with their respective source
     videoduplicatefinder = { url = "github:0x90d/videoduplicatefinder"; flake = false; };
-
+    ksysguard6 = { url = "github:zvova7890/ksysguard6"; flake = false; };
   };
 
   outputs = { self, ... } @ inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; } {
     imports = [
       # import all modules
       ./videoduplicatefinder/packages.nix
+      ./ksysguard6/packages.nix
     ];
 
     perSystem = { config, self', inputs', pkgs, system, ... }: {

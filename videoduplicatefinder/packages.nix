@@ -3,7 +3,8 @@
   inputs,
   ...
 }: {
-  perSystem = {pkgs, lib, ...}: let
+  perSystem = {pkgs, lib, ...}@args: let
+    wabellib = import ../lib.nix args;
     src = inputs.videoduplicatefinder;
     pname = "videoduplicatefinder";
     projectFile = "./VideoDuplicateFinder.sln";
@@ -16,10 +17,8 @@
   in {
     packages = {
       videoduplicatefinder = pkgs.buildDotnetModule {
-        inherit projectFile dotnet-sdk;
-        pname = pname;
+        inherit projectFile dotnet-sdk pname src;
         version = fullVersion;
-        src = src;
         nugetDeps = ./nix/deps.json;
         packNupkg = false;
         executables = ["VDF.GUI" "VDF.Web" "vdf-cli"];
@@ -33,7 +32,7 @@
         postInstall = ''
           install -Dm444 -T "$src/VDF.GUI/Assets/Linux/icon.png" "$out/share/icons/hicolor/256x256/apps/$pname.png"
 
-          install -Dm555 -t $out/share/applications ${
+          install -Dm555 -t "$out/share/applications" "${
             pkgs.makeDesktopItem {
               name = pname;
               desktopName = "Video Duplicate Finder";
@@ -46,7 +45,7 @@
               keywords=["duplicate" "video" "image" "finder" "similarity"];
               startupNotify = true;
             }
-          }/share/applications/$pname.desktop
+          }/share/applications/$pname.desktop"
         '';
 
         meta = {
@@ -56,32 +55,21 @@
         };
       };
     };
-    devShells = let
-      commonSetup = ''
-        echo "Read-only project source is in: $src"
-        TMPDIR=`${pkgs.coreutils}/bin/mktemp -d`
-        echo "Copying to $TMPDIR..."
-        cp -r "$src/"* "$TMPDIR/" || true
-        cp -r "$src/".* "$TMPDIR/" || true
-        echo "Adjusting permissions..."
-        ${pkgs.coreutils}/bin/chmod ug+w -R $TMPDIR
-      '';
-    in {
+    devShells = {
       videoduplicatefinder = pkgs.mkShell {
+        inherit src;
         buildInputs = [dotnet-sdk pkgs.git pkgs.alejandra];
-        src = src;
         shellHook = ''
-          ${commonSetup}
-          cd "$TMPDIR"
+          ${wabellib.devShells.commonSetup}
+
         '';
       };
       videoduplicatefinder_fetch-deps = pkgs.mkShell {
+        inherit src;
         buildInputs = [dotnet-sdk pkgs.nuget-to-json];
-        src = src;
         shellHook = ''
-          ${commonSetup}
           OLDPWD=`pwd`
-          cd "$TMPDIR"
+          ${wabellib.devShells.commonSetup}
           dotnet restore --packages out && \
           nuget-to-json out > deps.json && \
           dotnet build && \

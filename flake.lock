@@ -18,6 +18,22 @@
         "type": "github"
       }
     },
+    "ksysguard6": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1776709578,
+        "narHash": "sha256-HIbXTAhmlM75yiIm7qDEs8Hqr9ni+gZ5/oMLpk37iRU=",
+        "owner": "zvova7890",
+        "repo": "ksysguard6",
+        "rev": "6719a6085758705eea76b6b7f1eba751487f67dc",
+        "type": "github"
+      },
+      "original": {
+        "owner": "zvova7890",
+        "repo": "ksysguard6",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1778443072,
@@ -52,6 +68,7 @@
     "root": {
       "inputs": {
         "flake-parts": "flake-parts",
+        "ksysguard6": "ksysguard6",
         "nixpkgs": "nixpkgs",
         "videoduplicatefinder": "videoduplicatefinder"
       }
