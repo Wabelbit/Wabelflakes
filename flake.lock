@@ -21,11 +21,11 @@
     "ksysguard6": {
       "flake": false,
       "locked": {
-        "lastModified": 1776709578,
-        "narHash": "sha256-HIbXTAhmlM75yiIm7qDEs8Hqr9ni+gZ5/oMLpk37iRU=",
+        "lastModified": 1779634540,
+        "narHash": "sha256-1iULK5Ii7GigrTmJY0QZk9NNFsb2Bf6h7kZgK2nsXf0=",
         "owner": "zvova7890",
         "repo": "ksysguard6",
-        "rev": "6719a6085758705eea76b6b7f1eba751487f67dc",
+        "rev": "48fb6b72acf5167b327c287418363faf04f85405",
         "type": "github"
       },
       "original": {
@@ -36,11 +36,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1778443072,
-        "narHash": "sha256-zi7/fsqM/kFdNuED//4WOCUtezGtKKqRNORjMvfwjnA=",
+        "lastModified": 1780243769,
+        "narHash": "sha256-x5UQuRsH3MqI0U9afaXSNqzTPSeZlRLvFAav2Ux1pNw=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "da5ad661ba4e5ef59ba743f0d112cbc30e474f32",
+        "rev": "331800de5053fcebacf6813adb5db9c9dca22a0c",
         "type": "github"
       },
       "original": {
@@ -76,11 +76,11 @@
     "videoduplicatefinder": {
       "flake": false,
       "locked": {
-        "lastModified": 1778673480,
-        "narHash": "sha256-30k1qEehmi0dweawS2kj7vcTZhSajcAUsVOh8bTGqeo=",
+        "lastModified": 1780279022,
+        "narHash": "sha256-t9P/oIANEaN5QBCf/Gd+vfYKuNSX53rctPnnkHJRQD4=",
         "owner": "0x90d",
         "repo": "videoduplicatefinder",
-        "rev": "729c7cb73a9b6003b069986468ecab94fd82ed22",
+        "rev": "0090c1e5b62ffab66109f02f130b45204c812929",
         "type": "github"
       },
       "original": {
