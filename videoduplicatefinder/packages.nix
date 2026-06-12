@@ -8,10 +8,10 @@
     src = inputs.videoduplicatefinder;
     pname = "videoduplicatefinder";
     projectFile = "./VideoDuplicateFinder.sln";
-    dotnet-sdk = pkgs.dotnet-sdk_9;
-    #dotnet-runtime = pkgs.dotnetCorePackages.runtime_9_0;
+    dotnet-sdk = pkgs.dotnet-sdk_10;
+    #dotnet-runtime = pkgs.dotnetCorePackages.runtime_10_0;
     version = "3.0.0";
-    rev = "0090c1e5b62ffab66109f02f130b45204c812929";
+    rev = "6897b205c65e32f4f816f327fafc728e58f60f60";
     shortrev = builtins.substring 0 7 rev;
     fullVersion = "${version}+git-${shortrev}";
   in {
