@@ -8,7 +8,7 @@
     src = inputs.ksysguard6;
     pname = "ksysguard6";
     version = "6.0.1";
-    rev = "48fb6b72acf5167b327c287418363faf04f85405";
+    rev = "1b76da82ec259c18ffb4ec94af2ce6dd715c4ac5";
     shortrev = builtins.substring 0 7 rev;
     fullVersion = "${version}+git-${shortrev}";
     buildTimeDeps = with pkgs; [
