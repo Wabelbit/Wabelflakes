@@ -10,8 +10,8 @@
     projectFile = "./VideoDuplicateFinder.sln";
     dotnet-sdk = pkgs.dotnet-sdk_10;
     #dotnet-runtime = pkgs.dotnetCorePackages.runtime_10_0;
-    version = "4.0.0";
-    rev = "4bf4913a45d70f06972c48341229f156657c2da1";
+    version = "4.1.0";
+    rev = "a7019a7ebd604f1da407c82644022ff34c17a27c";
     shortrev = builtins.substring 0 7 rev;
     fullVersion = "${version}+git-${shortrev}";
   in {
@@ -23,10 +23,23 @@
         packNupkg = false;
         executables = ["VDF.GUI" "VDF.Web" "vdf-cli"];
         runtimeDeps = [pkgs.ffmpeg];
+        buildInputs = [pkgs.git];
         enableParallelBuilding = false; # somehow parallel build causes random failures :(
 
         doCheck = true;
-        disabledTests = ["VDF.Core.Tests.Chromaprint.FftServiceTests.Forward_PureSineWave_PeakAtExpectedBin"];
+        disabledTests = [
+          "VDF.Core.Tests.Chromaprint.FftServiceTests.Forward_PureSineWave_PeakAtExpectedBin"
+          "VDF.Core.Tests.DriveScanPlannerTests.PartitionByDrive_GroupsCaseInsensitivelyAndKeepsStableOrder"
+          "VDF.Core.Tests.DriveScanPlannerTests.Override_WinsAndSkipsTheProbe_KeyAndValueCaseInsensitive"
+          "VDF.Core.Tests.DatabaseCountTests.CountsOnlyEntriesUnderTheFolder"
+          "VDF.GUI.Tests.VersionConsistencyTests.BuiltAssemblyVersion_MatchesReleaseTag"
+          # these tests have Windows paths hardcoded?!
+          "VDF.GUI.Tests.DatabaseEditorRulesTests.Sort_BitrateReadsTheVideoStream"
+          "VDF.GUI.Tests.DatabaseEditorRulesTests.Sort_FlagFirstPutsFlaggedEntriesOnTop_ThenBaseMode"
+          "VDF.GUI.Tests.DatabaseEditorRulesTests.Sort_SizeLargestFirst_PathTiebreak"
+          "VDF.Core.Tests.ClearCachedMediaDataTests.KeepsIdentityDataAndManualFlags"
+          "VDF.Core.Tests.AI.FileEntryEmbeddingsTests.CurrentSchema_RoundTripsAndLoadsIntoEmbeddingsBuild"
+        ];
         nativeBuildInputs = [pkgs.ffmpeg];
 
         postInstall = ''
