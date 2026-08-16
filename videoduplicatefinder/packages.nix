@@ -11,7 +11,7 @@
     dotnet-sdk = pkgs.dotnet-sdk_10;
     #dotnet-runtime = pkgs.dotnetCorePackages.runtime_10_0;
     version = "4.1.0";
-    rev = "a7019a7ebd604f1da407c82644022ff34c17a27c";
+    rev = "35360a891685c03e87267f29b2d3610ad9a1686c";
     shortrev = builtins.substring 0 7 rev;
     fullVersion = "${version}+git-${shortrev}";
   in {
