@@ -6,18 +6,18 @@
   },
   {
     "pname": "AngleSharp",
-    "version": "1.0.0",
-    "hash": "sha256-0IBx4+dgw903WujficZeHnbPCaxUN7hmlB6FnRUNtDk="
-  },
-  {
-    "pname": "AngleSharp",
     "version": "1.1.2",
     "hash": "sha256-LvJDD+C/NiPLVjEnIWkR+39UkzoeWgPd7BBXakij0WU="
   },
   {
     "pname": "AngleSharp",
-    "version": "1.2.0",
-    "hash": "sha256-l8+Var9o773VL6Ybih3boaFf9sYjS7eqtLGd8DCIPsk="
+    "version": "1.5.0",
+    "hash": "sha256-290+oGXJRDf3q06rRrcQmg3XbKYhgIa6xjn5vUJWRJ4="
+  },
+  {
+    "pname": "AngleSharp",
+    "version": "1.7.0",
+    "hash": "sha256-ltWbyN4Bb993PayYfWQmTLpaPR+8Gf11NrkuLLKMqNU="
   },
   {
     "pname": "AngleSharp.Css",
@@ -26,13 +26,13 @@
   },
   {
     "pname": "AngleSharp.Css",
-    "version": "1.0.0-beta.154",
-    "hash": "sha256-j9fvqF4Uc932cBJTGkF2FVqeKBoiAFbTxx1WExi5V0A="
+    "version": "1.0.1",
+    "hash": "sha256-xWopyn/8oPkEpc/puQehpDFCo9fbf4cfvG4tcchq09Y="
   },
   {
     "pname": "AngleSharp.Diffing",
-    "version": "1.0.0",
-    "hash": "sha256-RaYpMt8e7uKkgmPOA9Y8YLq9QN1c9V7RiEZKV6sMg1s="
+    "version": "1.1.1",
+    "hash": "sha256-93boPzJhdD6I4iTrEQphl92WqFOB+LgkylzEH4RqIL4="
   },
   {
     "pname": "Avalonia",
@@ -121,18 +121,8 @@
   },
   {
     "pname": "bunit",
-    "version": "1.40.0",
-    "hash": "sha256-v7QmCmwOjhR1L1hTZ6fGtzrGoM6+gnC9M6hu+X8a6VA="
-  },
-  {
-    "pname": "bunit.core",
-    "version": "1.40.0",
-    "hash": "sha256-GGT5EbZb8OmxgxXaF9ubzRl7JO1Z9nUYQnQIgC15zQ4="
-  },
-  {
-    "pname": "bunit.web",
-    "version": "1.40.0",
-    "hash": "sha256-bW/Wl9NIJmHUk6CRAK1BtFGpF5TR87sop9hDjina4ik="
+    "version": "2.9.0",
+    "hash": "sha256-CQm9OGpkrmO3jJ3PDB8N8h8smvCmIIM1258HWMa/z20="
   },
   {
     "pname": "CommandLineParser",
@@ -216,13 +206,13 @@
   },
   {
     "pname": "Microsoft.AspNetCore.Components.WebAssembly",
-    "version": "9.0.5",
-    "hash": "sha256-rWcJVmxyqkYNW2X5d/PybEE5rWhhAOZwGIATF1XXaz0="
+    "version": "10.0.10",
+    "hash": "sha256-yimlEm1dzjvuZeYr4uDAw5DmSEdY8XMCp8Ri8EXeRag="
   },
   {
     "pname": "Microsoft.AspNetCore.Components.WebAssembly.Authentication",
-    "version": "9.0.5",
-    "hash": "sha256-qLhDOIbGXZHGuv3t4B8Ao98U7UirMUqbyXu88cI9aW8="
+    "version": "10.0.10",
+    "hash": "sha256-rnHdkXaeWRHT60dr7niH+9h3WoFfD9zV6CjkeQDgeAw="
   },
   {
     "pname": "Microsoft.Bcl.AsyncInterfaces",
@@ -310,9 +300,14 @@
     "hash": "sha256-AgvysszpQ11AiTBJFkvSy8JnwIWTj15Pfek7T7ThUc4="
   },
   {
+    "pname": "Microsoft.Extensions.TimeProvider.Testing",
+    "version": "10.9.0",
+    "hash": "sha256-RZ2QBzlZAENdM8Wn5NlQRQ8hevtHcpsfRg2BzuEs6ko="
+  },
+  {
     "pname": "Microsoft.JSInterop.WebAssembly",
-    "version": "9.0.5",
-    "hash": "sha256-l1ZydV4GC4S/s0/25HwwkIEPQEBQOoM3s8ICfdGPrSA="
+    "version": "10.0.10",
+    "hash": "sha256-QWfUu0pnrYf/GybsHK6affTfRadussf5jfk1cwY5cfY="
   },
   {
     "pname": "Microsoft.ML.OnnxRuntime",
@@ -375,14 +370,24 @@
     "hash": "sha256-4ypEnTGUXAudFp61vGduHj9YmqtpiI5J1wP9wcOEwXY="
   },
   {
+    "pname": "SkiaSharp",
+    "version": "4.151.1",
+    "hash": "sha256-LR/u8j8o5VhkythEn3tgq/XW2xqmHsB674N+ng6u5z4="
+  },
+  {
     "pname": "SkiaSharp.NativeAssets.Linux",
     "version": "3.119.4",
     "hash": "sha256-+uBVQFmxEH73iI5GwgvftUhAHvenpvc5GtT63HQy1Qo="
   },
   {
+    "pname": "SkiaSharp.NativeAssets.Linux",
+    "version": "4.151.1",
+    "hash": "sha256-jq7LZkQ6LdLCdAPhgQaSzqZwsgInbA8QovLUI92CAVg="
+  },
+  {
     "pname": "SkiaSharp.NativeAssets.macOS",
-    "version": "3.119.4",
-    "hash": "sha256-9/L1Oc5bujN6pKjW6sJcr1jL3RLt8/Mt3MmClOcwzyw="
+    "version": "4.151.1",
+    "hash": "sha256-nt58+/t4OynYqY99sjOxsQwDLJF88nD8Z+Wwj5DavdU="
   },
   {
     "pname": "SkiaSharp.NativeAssets.WebAssembly",
@@ -391,8 +396,8 @@
   },
   {
     "pname": "SkiaSharp.NativeAssets.Win32",
-    "version": "3.119.4",
-    "hash": "sha256-WlaYsbTh/cn/6YaN9odNtfpp8hpN52unGgGlQum0M5E="
+    "version": "4.151.1",
+    "hash": "sha256-pulHlVVEDtj9MO5zeEcBRFIYR66keeHv2IXzyAE/5Fg="
   },
   {
     "pname": "Splat",
@@ -433,6 +438,11 @@
     "pname": "System.Management",
     "version": "9.0.5",
     "hash": "sha256-r1BSfaOI0SSl3ScAUXIYDiEjnljqEJ5Ncx3fXjtwTaU="
+  },
+  {
+    "pname": "System.Numerics.Tensors",
+    "version": "10.0.11",
+    "hash": "sha256-SaT0Uhv0zkipt5QP3f7fC6iDu3P7d/niRtSJbWNIywE="
   },
   {
     "pname": "System.Numerics.Tensors",

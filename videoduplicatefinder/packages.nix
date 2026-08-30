@@ -11,19 +11,49 @@
     dotnet-sdk = pkgs.dotnet-sdk_10;
     #dotnet-runtime = pkgs.dotnetCorePackages.runtime_10_0;
     version = "4.1.0";
-    rev = "35360a891685c03e87267f29b2d3610ad9a1686c";
+    rev = "51fbf0512002309e852e0e2e0a9eea0aba5bfba8";
     shortrev = builtins.substring 0 7 rev;
     fullVersion = "${version}+git-${shortrev}";
   in {
     packages = {
-      videoduplicatefinder = pkgs.buildDotnetModule {
+      videoduplicatefinder =
+      ### WORKAROUND for build failure related to SkiaSharp, see https://github.com/NixOS/nixpkgs/issues/370827 ###
+      let
+      buildDotnetModule = pkgs.buildDotnetModule.override {
+        addNuGetDeps = pkgs.dotnetCorePackages.addNuGetDeps.override {
+          fetchNupkg = pkgs.dotnetCorePackages.fetchNupkg.override {
+            overrides = {
+              "SkiaSharp.NativeAssets.Linux" = package: package.overrideAttrs (
+                old:
+                lib.optionalAttrs pkgs.stdenv.hostPlatform.isLinux {
+                  nativeBuildInputs = old.nativeBuildInputs or [ ] ++ [ pkgs.autoPatchelfHook pkgs.stdenv.cc.cc.lib ];
+
+                  buildInputs = old.buildInputs or [ ] ++ [ pkgs.fontconfig ];
+
+                  preInstall = old.preInstall or "" + ''
+                    cd runtimes
+                    for platform in *; do
+                      [[ $platform == "${pkgs.dotnetCorePackages.systemToDotnetRid pkgs.stdenv.hostPlatform.system}" ]] ||
+                        rm -r "$platform"
+                    done
+                    cd - >/dev/null
+                  '';
+                }
+              );
+            };
+          };
+        };
+      };
+      ### END WORKAROUND ###
+      in buildDotnetModule {
         inherit projectFile dotnet-sdk pname src;
         version = fullVersion;
         nugetDeps = ./nix/deps.json;
         packNupkg = false;
         executables = ["VDF.GUI" "VDF.Web" "vdf-cli"];
         runtimeDeps = [pkgs.ffmpeg];
-        buildInputs = [pkgs.git];
+        buildInputs = [];
+        nativeBuildInputs = [pkgs.ffmpeg pkgs.git];
         enableParallelBuilding = false; # somehow parallel build causes random failures :(
 
         doCheck = true;
@@ -40,7 +70,6 @@
           "VDF.Core.Tests.ClearCachedMediaDataTests.KeepsIdentityDataAndManualFlags"
           "VDF.Core.Tests.AI.FileEntryEmbeddingsTests.CurrentSchema_RoundTripsAndLoadsIntoEmbeddingsBuild"
         ];
-        nativeBuildInputs = [pkgs.ffmpeg];
 
         postInstall = ''
           install -Dm444 -T "$src/VDF.GUI/Assets/Linux/icon.png" "$out/share/icons/hicolor/256x256/apps/$pname.png"
